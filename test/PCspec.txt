@@ -1,0 +1,4 @@
+CPU　Intel(R) Celeron(R) CPU 1000M @ 1.80GHz 1.80GHz
+メモリ　4.00 GB
+ハードディスク 614 GB
+OS Windows 8
