@@ -6,6 +6,12 @@
 <%
     HttpSession hs = request.getSession();
     UserDataBeans udb = (UserDataBeans)hs.getAttribute("udb");
+        String massage ="";
+            switch(udb.getType()){
+        case 1: massage="エンジニア";break;
+        case 2: massage="営業";break;
+        case 3: massage="その他";break;
+                        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +25,7 @@
         <%//課題３　ここもudb%>
         名前:<%= udb.getName()%><br>
         生年月日:<%= udb.getYear() + "年" + udb.getMonth() + "月" + udb.getDay() + "日"%><br>
-        種別:<%= udb.getType()%><br>
+        種別:<%= massage%><br>
         電話番号:<%= udb.getTell()%><br>
         自己紹介:<%= udb.getComment()%><br>
         以上の内容で登録しました。<br>
