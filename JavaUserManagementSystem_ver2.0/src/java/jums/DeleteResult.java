@@ -1,6 +1,9 @@
 package jums;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +26,11 @@ public class DeleteResult extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException ,SQLException{
+        
+        
         try {
+            response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
             
             //アクセスルートチェック
@@ -44,7 +49,7 @@ public class DeleteResult extends HttpServlet {
             //何らかの理由で失敗したらエラーページにエラー文を渡して表示。想定は不正なアクセスとDBエラー
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);            
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,8 +63,12 @@ public class DeleteResult extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws ServletException, IOException { 
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteResult.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**
@@ -73,7 +82,12 @@ public class DeleteResult extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteResult.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    
     }
 
     /**
